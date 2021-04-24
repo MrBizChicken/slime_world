@@ -12,7 +12,7 @@ class Spike_platform(pygame.sprite.Sprite):
         self.width = 300
         self.height = 32
         self.speed = 2
-        self.image = pygame.image.load("spike_log.png")
+        self.image = pygame.image.load("assests/images/spike_log.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
 

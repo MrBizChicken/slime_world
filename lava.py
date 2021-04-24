@@ -13,6 +13,6 @@ class Lava(pygame.sprite.Sprite):
         self.width = 1000
         self.height = 55
         self.speed = 5
-        self.image = pygame.image.load("lava.png")
+        self.image = pygame.image.load("assests/images/lava.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)

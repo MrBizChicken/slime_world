@@ -12,7 +12,7 @@ class Platform(pygame.sprite.Sprite):
         self.width = 300
         self.height = 32
         self.speed = 2
-        self.image = pygame.image.load("log.png")
+        self.image = pygame.image.load("assests/images/log.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
 
@@ -24,12 +24,13 @@ class Platform(pygame.sprite.Sprite):
     def move_right(self):
         self.rect = self.rect.move(-self.speed, 0)
 
-    # def update(self, player_group):
-    #     player = pygame.sprite.spritecollide(self, player_group, False)
-    #
-    #     if player:
-    #         if player[0].rect.left >= 500:
-    #             self.rect = self.rect.move(self.speed, 0)
-    #
-    #         if player[0].rect.right >= 400:
-    #             self.rect = self.rect.move(-self.speed, 0)
+    def update(self, player_group):
+        player = pygame.sprite.spritecollide(self, player_group, False)
+
+        if player:
+            if self.rect.right == 0:
+                self.rect.left = GAME_WIDTH
+
+                if self.rect.right == 0:
+                    self.player_score = self.player_score + 1
+                    print(self.player_score)

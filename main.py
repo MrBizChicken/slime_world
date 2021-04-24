@@ -18,7 +18,7 @@ pygame.init()
 clock = pygame.time.Clock()
 pygame.mouse.set_visible(False)
 surface = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
-background_image = pygame.image.load("slime_background.png").convert()
+background_image = pygame.image.load("assests/images/slime_background.png").convert()
 
 pygame.init()
 
@@ -101,19 +101,19 @@ def main():
                 if event.key == pygame.K_q:
                     pygame.quit()
                 if event.key == pygame.K_SPACE:
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("jump.mp3"))
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/jump.mp3"))
                     mixer.music.set_volume(0.50)
 
 
                 if event.key == pygame.K_LEFT:
 
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("slither.mp3"))
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/slither.mp3"))
                     mixer.music.set_volume(0.50)
 
                 if event.key == pygame.K_RIGHT:
 
 
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("slither.mp3"))
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/slither.mp3"))
                     mixer.music.set_volume(0.50)
 
 
@@ -159,10 +159,10 @@ def update():
 
 
 
-mixer.music.load("song.mp3")
+mixer.music.load("assests/sounds/song.mp3")
 mixer.music.set_volume(50)
 
-pygame.mixer.Channel(1).play(pygame.mixer.Sound("song.mp3"))
+pygame.mixer.Channel(1).play(pygame.mixer.Sound("assests/sounds/song.mp3"))
 
 
 

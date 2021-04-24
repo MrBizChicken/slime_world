@@ -2,7 +2,7 @@ import pygame, random
 from constants import *
 import random
 from pygame import mixer
-
+print
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -12,8 +12,8 @@ class Player(pygame.sprite.Sprite):
         self.speed = 5
         self.x = GAME_WIDTH // 2 - self.width * 2
         self.y = 0
-        self.lift = -3
-        self.image = pygame.image.load("blob.png")
+        self.lift = -10
+        self.image = pygame.image.load("assests/images/blob.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
         self.grav = 0.3
@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
 
 
     def update(self, all_group, platform_group, lava_group, spike_platform_group):
-        print(self.vel)
+        # print(self.vel)
         if self.vel > self.max_vel:
             self.vel = self.max_vel
 
@@ -47,7 +47,6 @@ class Player(pygame.sprite.Sprite):
     def gravity(self):
         if self.falling == True:
 
-
             self.vel += self.grav
 
 
@@ -58,7 +57,7 @@ class Player(pygame.sprite.Sprite):
         platforms = pygame.sprite.spritecollide(self, platform_group, False)
 
         if platforms:
-            self.image = pygame.image.load("blob.png")
+            self.image = pygame.image.load("assests/images/blob.png")
             if self.rect.bottom < platforms[0].rect.bottom:
 
                 self.rect.bottom = platforms[0].rect.top
@@ -107,7 +106,7 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_LEFT]:
-            self.image = pygame.image.load("blob.png")
+            self.image = pygame.image.load("assests/images/blob.png")
             if self.rect.x > 400:
                 self.rect.x += -self.speed
             else:
@@ -116,7 +115,7 @@ class Player(pygame.sprite.Sprite):
 
 
         if keys[pygame.K_RIGHT]:
-            self.image = pygame.image.load("blob.png")
+            self.image = pygame.image.load("assests/images/blob.png")
             if self.rect.left < 500:
                 self.rect.x += self.speed
             else:
@@ -125,4 +124,4 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_SPACE]:
             self.jump()
-            self.image = pygame.image.load("blob_jump.png")
+            self.image = pygame.image.load("assests/images/blob_jump.png")
