@@ -8,6 +8,8 @@ pygame.init()
 from pygame import mixer
 mixer.init()
 
+# states 0 menu, 1 running, 2 pause, 3 death
+states = 0
 
 
 
@@ -135,6 +137,22 @@ def main():
 
 
 def draw():
+    # main menu
+    if state == 0:
+        surface.fill((255, 200, 200))
+
+    # running
+    if state == 2:
+        pass
+
+    # pause
+    if state == 3:
+        pass
+
+    # death
+    if state == 4:
+        pass
+
     surface.blit(background_image, [0, 0])
     player_group.draw(surface)
     lava_group.draw(surface)
@@ -149,6 +167,23 @@ def draw():
 
 
 def update():
+
+    # main menu
+    if state == 0:
+        pass
+
+    # running
+    if state == 2:
+        pass
+
+    # pause
+    if state == 3:
+        pass
+
+    # death
+    if state == 4:
+        pass
+
 
     player_group.update(all_group, platform_group, lava_group, spike_platform_group)
     lava_group.update()
