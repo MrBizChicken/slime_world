@@ -22,6 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.falling = True
         self.can_jump = True
         self.coin_score = 0
+        self.is_dead = False
 
 
 
@@ -36,6 +37,7 @@ class Player(pygame.sprite.Sprite):
 
         if self.vel < self.max_vel:
             self.can_jump = False
+
 
 
 
@@ -70,16 +72,19 @@ class Player(pygame.sprite.Sprite):
 
             if self.rect.top < lava[0].rect.top:
 
-                self.rect.bottom = 0
+                self.death()
 
 
 
         if pygame.sprite.spritecollide(self, spike_platform_group, False):
-            self.rect.bottom = 0
+            self.death()
 
 
 
 
+    def death(self):
+        self.rect.bottom = 0
+        self.is_dead = True
 
 
 

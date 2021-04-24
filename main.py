@@ -9,7 +9,7 @@ from pygame import mixer
 mixer.init()
 
 # states 0 menu, 1 running, 2 pause, 3 death
-states = 0
+states= 0
 
 
 
@@ -87,6 +87,7 @@ for sp in spike_platform_group:
 
 
 def main():
+    global states
 
     running = True
 
@@ -102,21 +103,42 @@ def main():
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_q:
                     pygame.quit()
+
+                if event.key == pygame.K_p:
+
+                    if states == 1:
+                        states = 2
+
+                    elif states == 2:
+                        states = 1
+
+
                 if event.key == pygame.K_SPACE:
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/jump.mp3"))
-                    mixer.music.set_volume(0.50)
+                    if states == 0:
+                        states = 1
+                    if states == 1:
+                        pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/jump.mp3"))
+                        mixer.music.set_volume(0.50)
+
+                    if states == 3:
+                        states = 1
+                        player.is_dead = False    
 
 
                 if event.key == pygame.K_LEFT:
+                    if states == 1:
+                        pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/slither.mp3"))
+                        mixer.music.set_volume(0.50)
 
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/slither.mp3"))
-                    mixer.music.set_volume(0.50)
 
                 if event.key == pygame.K_RIGHT:
+                    if states == 1:
+                        pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/slither.mp3"))
+                        mixer.music.set_volume(0.50)
 
 
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound("assests/sounds/slither.mp3"))
-                    mixer.music.set_volume(0.50)
+
+
 
 
 
@@ -137,27 +159,28 @@ def main():
 
 
 def draw():
+    global states
     # main menu
-    if state == 0:
-        surface.fill((255, 200, 200))
+    if states == 0:
+        menu()
 
     # running
-    if state == 2:
-        pass
+    if states == 1:
+        surface.blit(background_image, [0, 0])
+        player_group.draw(surface)
+        lava_group.draw(surface)
+        platform_group.draw(surface)
+        spike_platform_group.draw(surface)
 
     # pause
-    if state == 3:
-        pass
+    if states == 2:
+        pause()
 
     # death
-    if state == 4:
+    if states == 3:
         pass
 
-    surface.blit(background_image, [0, 0])
-    player_group.draw(surface)
-    lava_group.draw(surface)
-    platform_group.draw(surface)
-    spike_platform_group.draw(surface)
+
 
 
 
@@ -168,30 +191,38 @@ def draw():
 
 def update():
 
+    global states
     # main menu
-    if state == 0:
+    if states == 0:
         pass
 
     # running
-    if state == 2:
-        pass
+    if states == 1:
+        if player.is_dead == True:
+            states = 3
+        player_group.update(all_group, platform_group, lava_group, spike_platform_group)
+        lava_group.update()
+        platform_group.update(player_group)
+        spike_platform_group.update(player_group)
 
     # pause
-    if state == 3:
+    if states == 2:
         pass
 
     # death
-    if state == 4:
-        pass
-
-
-    player_group.update(all_group, platform_group, lava_group, spike_platform_group)
-    lava_group.update()
-    platform_group.update(player_group)
-    spike_platform_group.update(player_group)
+    if states == 3:
+        surface.fill((100, 100, 100))
 
 
 
+
+def menu():
+    surface.fill((255, 200, 200))
+
+
+
+def pause():
+    surface.fill((200, 200, 255))
 
 
 mixer.music.load("assests/sounds/song.mp3")
